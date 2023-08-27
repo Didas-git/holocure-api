@@ -1,0 +1,56 @@
+{
+  "private": true,
+  "name": "holocapi",
+  "version": "0.0.0",
+  "description": "An UNOFFICIAL api for holocure",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "./dist/"
+  ],
+  "scripts": {
+    "lint": "eslint src/**/*.ts",
+    "build": "rm -rf dist && tsc",
+    "dev": "ts-node ./src/index.ts",
+    "test": "vitest run --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Didas-git/holocure-api.git"
+  },
+  "author": "DidaS",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Didas-git/holocure-api/issues"
+  },
+  "homepage": "https://github.com/Didas-git/holocure-api#readme",
+  "dependencies": {
+    "@infinite-fansub/logger": "^2.2.2",
+    "colours.js": "^3.1.2",
+    "express": "^4.18.2",
+    "nekdis": "^0.10.2",
+    "tslib": "^2.6.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/node": "^20.5.6",
+    "@typescript-eslint/eslint-plugin": "^6.4.1",
+    "@typescript-eslint/parser": "^6.4.1",
+    "@vitest/coverage-v8": "^0.34.3",
+    "eslint": "^8.48.0",
+    "eslint-plugin-tsdoc": "^0.2.17",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2",
+    "vitest": "^0.34.3"
+  }
+}
