@@ -199,3 +199,11 @@ const characterSchema = client.schema({
 });
 
 export const characterModel = client.model("Character", characterSchema);
+
+export async function initializeIndexes(): Promise<void> {
+    await weaponModel.createIndex();
+    await itemModel.createIndex();
+    await skillModel.createIndex();
+    await characterModel.createIndex();
+    logger.log("Initialized all model indexes");
+}

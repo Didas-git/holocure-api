@@ -9,10 +9,11 @@ import { client } from "nekdis";
 
 (async () => {
     await client.connect().then(() => {
-        logger.log("Connected to Redis!");
+        logger.log("Connected to Redis");
     });
 
-    await import(join(__dirname, "nekdis"));
+    const { initializeIndexes } = await import(join(__dirname, "nekdis"));
+    await initializeIndexes();
 
     const app = express();
 
