@@ -5,17 +5,25 @@ import { hashApiKey } from "./hashing";
 
 import type { RequestHandler, Response } from "express";
 
-import type { ErrorResponse } from "../typings/shared";
+import { IsSuccessful, type ErrorResponse, IsClientError, IsServerError, IsRedirection } from "../typings/shared";
 
 export const LoggerMiddleware: RequestHandler = (req, res, next) => {
-    const start = Date.now();
+    const start = performance.now();
     res.on("finish", function (this: Response) {
+        const end = performance.now();
         const time = Intl.DateTimeFormat("en-GB", { dateStyle: "short", timeStyle: "medium" }).format().replace(",", " -");
         // eslint-disable-next-line max-len
-        logger.print(`[API] ${time} |${colorConsole.uniform(` ${colorConsole.uniform(this.statusCode.toString(), Color.fromHex("#101010"))} `, this.statusCode === 200 || this.statusCode === 202 || this.statusCode === 304 ? Color.fromHex("#4bfc42") : Color.fromHex("#fc330f"), true)}| ${Date.now() - start}ms | ${req.socket.remoteAddress} |${colorConsole.uniform(` ${req.method} `, Color.fromHex("#243aff"), true)} "${req.originalUrl}"`);
+        logger.print(`[API] ${time} |${colorConsole.uniform(` ${colorConsole.uniform(this.statusCode.toString(), Color.fromHex("#101010"))} `, getStatusColor(this.statusCode), true)}| ${(end - start).toFixed(1)}ms | ${req.socket.remoteAddress} |${colorConsole.uniform(` ${req.method} `, Color.fromHex("#243aff"), true)} => "${req.originalUrl}"`);
     });
     next();
 };
+
+export function getStatusColor(code: number): Color {
+    if (IsSuccessful(code) || code === 304) return Color.fromHex("#4bfc42");
+    if (IsClientError(code) || IsServerError(code)) return Color.fromHex("#fc330f");
+    if (IsRedirection(code)) return Color.fromHex("#f5d225");
+    return Color.fromHex("#1fa2ff");
+}
 
 export const AuthMiddleWare: RequestHandler = async (req, res, next) => {
     if (req.url === "/") return next();
