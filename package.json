@@ -21,7 +21,8 @@
   "scripts": {
     "lint": "eslint src/**/*.ts",
     "build": "rm -rf dist && tsc",
-    "dev": "ts-node ./src/index.ts",
+    "start": "ENVIRONMENT=Production node .",
+    "dev": "ENVIRONMENT=Development ts-node ./src/index.ts",
     "test": "vitest run --coverage"
   },
   "repository": {

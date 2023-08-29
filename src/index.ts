@@ -14,6 +14,11 @@ import type { ErrorResponse } from "./typings/shared";
     // Create the RediSearch indexes
     await initializeIndexes();
 
+    if (process.env.ENVIRONMENT === "Development") {
+        const { populateTestUsers } = await import(join(__dirname, "database/populate"));
+        await populateTestUsers();
+    }
+
     //deepcode ignore UseHelmetForExpress: I don't think helmet is really needed for our use case, deepcode ignore UseCsurfForExpress: We already use api keys therefor i don't think this is needed
     const app = express();
 

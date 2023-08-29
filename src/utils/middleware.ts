@@ -41,13 +41,13 @@ export const AuthMiddleWare: RequestHandler = async (req, res, next) => {
 
     const user = await apiUserModel.findApiKey(hashedKey);
 
-    // if (typeof user === "undefined") {
-    //     return res.status(401).json({
-    //         code: 401,
-    //         error: "The given api key is not valid",
-    //         details: "While attempting to fetch the user from the database we did not find one that corresponds to the given api key"
-    //     } satisfies ErrorResponse);
-    // }
+    if (typeof user === "undefined") {
+        return res.status(401).json({
+            code: 401,
+            error: "The given api key is not valid",
+            details: "While attempting to fetch the user from the database we did not find one that corresponds to the given api key"
+        } satisfies ErrorResponse);
+    }
 
     if (user.banned) {
         return res.status(401).json({
@@ -58,15 +58,18 @@ export const AuthMiddleWare: RequestHandler = async (req, res, next) => {
     }
 
     if (!user.isAdministrator) {
-        if (req.method === "GET" && user.permissions.read) return next();
-        if (req.method !== "GET" && user.permissions.write) return next();
-
-        return res.status(401).json({
-            code: 401,
-            error: "Invalid permissions",
-            details: "The current user does not have any granted permissions, please contact an administrator"
-        } satisfies ErrorResponse);
+        if (!(req.method === "GET" && user.permissions.read) && !(req.method !== "GET" && user.permissions.write)) {
+            return res.status(401).json({
+                code: 401,
+                error: "Invalid permissions",
+                details: "The current user does not have any granted permissions, please contact an administrator"
+            } satisfies ErrorResponse);
+        }
     }
+
+    // Update user uses
+    user.uses += 1;
+    await apiUserModel.save(user);
 
     next();
 };
