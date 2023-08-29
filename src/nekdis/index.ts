@@ -1,3 +1,5 @@
+import "./client";
+
 import { client } from "nekdis";
 
 const weaponSchema = client.schema({
@@ -200,10 +202,32 @@ const characterSchema = client.schema({
 
 export const characterModel = client.model("Character", characterSchema);
 
+const apiUserSchema = client.schema({
+    name: "string",
+    apiKey: "string",
+    banned: { type: "boolean", default: false },
+    uses: { type: "number", default: 0 },
+    isAdministrator: { type: "boolean", default: false },
+    permissions: {
+        type: "object",
+        properties: {
+            write: { type: "boolean", default: false },
+            read: { type: "boolean", default: true }
+        }
+    }
+}, {
+    findApiKey: async function (key: string) {
+        return await this.search().where("apiKey").eq(key).returnFirst();
+    }
+});
+
+export const apiUserModel = client.model("APIUser", apiUserSchema);
+
 export async function initializeIndexes(): Promise<void> {
     await weaponModel.createIndex();
     await itemModel.createIndex();
     await skillModel.createIndex();
     await characterModel.createIndex();
+    await apiUserModel.createIndex();
     logger.log("Initialized all model indexes");
 }
