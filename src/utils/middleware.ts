@@ -3,9 +3,16 @@ import { Color, colorConsole } from "colours.js";
 import { apiUserModel } from "../database";
 import { hashApiKey } from "./hashing";
 
+import {
+    IsSuccessful,
+    IsClientError,
+    IsServerError,
+    IsRedirection
+} from "../typings/status-codes";
+
 import type { RequestHandler, Response } from "express";
 
-import { IsSuccessful, type ErrorResponse, IsClientError, IsServerError, IsRedirection } from "../typings/shared";
+import type { ErrorResponse } from "../typings/shared";
 
 export const LoggerMiddleware: RequestHandler = (req, res, next) => {
     const start = performance.now();
