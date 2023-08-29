@@ -11,7 +11,7 @@ export const LoggerMiddleware: RequestHandler = (req, res, next) => {
     const start = performance.now();
     res.on("finish", function (this: Response) {
         const end = performance.now();
-        const time = Intl.DateTimeFormat("en-GB", { dateStyle: "short", timeStyle: "medium" }).format().replace(",", " -");
+        const time = Intl.DateTimeFormat("en-GB", { dateStyle: "short", timeStyle: "medium" }).format().replaceAll(",", " -");
         // eslint-disable-next-line max-len
         logger.print(`[API] ${time} |${colorConsole.uniform(` ${colorConsole.uniform(this.statusCode.toString(), Color.fromHex("#101010"))} `, getStatusColor(this.statusCode), true)}| ${(end - start).toFixed(1)}ms | ${req.socket.remoteAddress} |${colorConsole.uniform(` ${req.method} `, Color.fromHex("#243aff"), true)} => "${req.originalUrl}"`);
     });

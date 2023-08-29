@@ -15,10 +15,13 @@ import type { ErrorResponse } from "./typings/shared";
     // Create the RediSearch indexes
     await initializeIndexes();
 
+    //deepcode ignore UseHelmetForExpress: I don't think helmet is really needed for our use case, deepcode ignore UseCsurfForExpress: We already use api keys therefor i don't think this is needed
     const app = express();
 
     // `Response.json` will indent with 4 spaces
     app.set("json spaces", 4);
+    // Remove header
+    app.disable("x-powered-by");
     app.use(LoggerMiddleware);
 
     // api versioning
