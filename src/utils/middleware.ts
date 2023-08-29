@@ -33,7 +33,7 @@ export const AuthMiddleWare: RequestHandler = async (req, res, next) => {
     if (typeof apiKey === "undefined") {
         return res.status(401).json({
             code: 401,
-            error: "An api key was not given"
+            error: "No API Key was provided"
         } satisfies ErrorResponse);
     }
 
