@@ -1,6 +1,6 @@
 import { client } from "nekdis";
 
-client._options = {
+client.options = {
     inject: {
         schema: {
             options: {

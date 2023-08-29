@@ -6,7 +6,7 @@ import { apiUserModel } from ".";
 
 export async function populateTestUsers(): Promise<void> {
     const possibleTest = await apiUserModel.get("TEST");
-    if (possibleTest !== null) return;
+    if (typeof possibleTest !== "undefined") return;
 
     const { key, hashedKey } = createApiKey();
 
