@@ -1,6 +1,6 @@
 import { Color, colorConsole } from "colours.js";
 
-import { apiUserModel } from "../nekdis";
+import { apiUserModel } from "../database";
 import { hashApiKey } from "./hashing";
 
 import type { RequestHandler, Response } from "express";
