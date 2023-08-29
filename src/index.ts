@@ -5,13 +5,12 @@ import { join } from "node:path";
 import express from "express";
 
 import { LoggerMiddleware } from "./utils/middleware";
+import { initializeIndexes } from "./database";
 import { v1Router } from "./routers";
 
 import type { ErrorResponse } from "./typings/shared";
 
 (async () => {
-    // Lazy loading so the redis client is defined when the models are created
-    const { initializeIndexes } = await import(join(__dirname, "database"));
     // Create the RediSearch indexes
     await initializeIndexes();
 
