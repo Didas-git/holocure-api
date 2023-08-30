@@ -2,6 +2,11 @@ import "./client";
 
 import { client } from "nekdis";
 
+const sharedValueSecondsSchema = client.schema({
+    value: "number",
+    inSeconds: "number"
+});
+
 const weaponSchema = client.schema({
     name: "string",
     description: "string",
@@ -18,7 +23,7 @@ const weaponSchema = client.schema({
      * 2 = Collab Weapon
      * 3 = Super Collab Weapon
     */
-    type: "number",
+    type: { type: "number", literal: [0, 1, 2, 3] },
     /** 0-6 but 1-7 in game (7 = MAX) */
     levels: "array",
     damage: {
@@ -41,30 +46,20 @@ const weaponSchema = client.schema({
              * 1 = MultiShot
              * 2 = Ranged
             */
-            type: "number",
+            type: { type: "number", literal: [0, 1, 2] },
             time: {
                 type: "object",
-                properties: {
-                    value: "number",
-                    inSeconds: "number",
-                    /** If it is undefined then its the same as base */
+                properties: client.schema({
                     minimum: {
                         type: "object",
-                        properties: {
-                            value: "number",
-                            inSeconds: "number"
-                        },
-                        optional: true
+                        properties: sharedValueSecondsSchema
                     }
-                }
+                }).extends(sharedValueSecondsSchema)
             },
             count: "number",
             delay: {
                 type: "object",
-                properties: {
-                    value: "number",
-                    inSeconds: "number"
-                }
+                properties: sharedValueSecondsSchema
             }
         }
     },
@@ -78,20 +73,14 @@ const weaponSchema = client.schema({
             },
             cooldown: {
                 type: "object",
-                properties: {
-                    value: "number",
-                    inSeconds: "number"
-                }
+                properties: sharedValueSecondsSchema
             }
         }
     },
     area: "number",
     duration: {
         type: "object",
-        properties: {
-            value: "number",
-            inSeconds: "number"
-        }
+        properties: sharedValueSecondsSchema
     },
     /** If its 0 then there are no projectiles */
     projectileSpeed: "number",
@@ -106,10 +95,7 @@ const weaponSchema = client.schema({
         properties: {
             duration: {
                 type: "object",
-                properties: {
-                    value: "number",
-                    inSeconds: "number"
-                }
+                properties: sharedValueSecondsSchema
             },
             speed: "number"
         }

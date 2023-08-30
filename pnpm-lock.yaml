@@ -15,8 +15,8 @@ dependencies:
     specifier: ^4.18.2
     version: 4.18.2
   nekdis:
-    specifier: ^0.10.3
-    version: 0.10.3
+    specifier: ^0.11.0
+    version: 0.11.0
   tslib:
     specifier: ^2.6.2
     version: 2.6.2
@@ -314,8 +314,8 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
-  /@humanwhocodes/config-array@0.11.10:
-    resolution: {integrity: sha512-KVVjQmNUepDVGXNuoRRdmmEjruj0KfiGSbS8LVc12LMsWDQzRXJ0qdhN8L8uUigKpfEHRhlaQFY0ib1tnUbNeQ==}
+  /@humanwhocodes/config-array@0.11.11:
+    resolution: {integrity: sha512-N2brEuAadi0CcdeMXUkhbZB84eskAc8MEX1By6qEchoVywSgXPIjou4rYsl0V3Hj0ZnuGycGCjdNgockbzeWNA==}
     engines: {node: '>=10.10.0'}
     dependencies:
       '@humanwhocodes/object-schema': 1.2.1
@@ -1141,7 +1141,7 @@ packages:
       '@eslint-community/regexpp': 4.8.0
       '@eslint/eslintrc': 2.1.2
       '@eslint/js': 8.48.0
-      '@humanwhocodes/config-array': 0.11.10
+      '@humanwhocodes/config-array': 0.11.11
       '@humanwhocodes/module-importer': 1.0.1
       '@nodelib/fs.walk': 1.2.8
       ajv: 6.12.6
@@ -1741,8 +1741,8 @@ packages:
     engines: {node: '>= 0.6'}
     dev: false
 
-  /nekdis@0.10.3:
-    resolution: {integrity: sha512-OmMw3G3FgVB6Qe7fraEOgX7hao+7JdE9iG09rjPPJk0mVpKESVzX/jVjosc/ZmFCZONECjrebSCLxrVH9Hdtqw==}
+  /nekdis@0.11.0:
+    resolution: {integrity: sha512-riEdZRXALBXd1FIXF9AUK4lELPP1RmCzOp01iAKfKlCHkULWMNtuxuLFq6KgBZISMbCz/NVrnocaeTn4wS5SkA==}
     dependencies:
       '@infinite-fansub/logger': 2.2.2
       colours.js: 3.1.2
@@ -1865,8 +1865,8 @@ packages:
       pathe: 1.1.1
     dev: true
 
-  /postcss@8.4.28:
-    resolution: {integrity: sha512-Z7V5j0cq8oEKyejIKfpD8b4eBy9cwW2JWPk0+fB1HOAMsfHbnAXLLS+PfVWlzMSLQaWttKDt607I0XHmpE67Vw==}
+  /postcss@8.4.29:
+    resolution: {integrity: sha512-cbI+jaqIeu/VGqXEarWkRCCffhjgXc0qjBtXpqJhTBohMUjUQnbBr0xqX3vEKudc4iviTewcJo5ajcec5+wdJw==}
     engines: {node: ^10 || ^12 || >=14}
     dependencies:
       nanoid: 3.3.6
@@ -2314,7 +2314,7 @@ packages:
     dependencies:
       '@types/node': 20.5.7
       esbuild: 0.18.20
-      postcss: 8.4.28
+      postcss: 8.4.29
       rollup: 3.28.1
     optionalDependencies:
       fsevents: 2.3.3
