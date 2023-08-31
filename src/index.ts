@@ -15,7 +15,7 @@ import type { ErrorResponse } from "./typings/shared";
     await initializeIndexes();
 
     if (process.env.ENVIRONMENT === "Development") {
-        const { populateTestUsers } = await import(join(__dirname, "database/populate"));
+        const { populateTestUsers } = await import("./database/populate");
         await populateTestUsers();
     }
 

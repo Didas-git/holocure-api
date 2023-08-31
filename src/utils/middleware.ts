@@ -45,7 +45,6 @@ export const AuthMiddleWare: RequestHandler = async (req, res, next) => {
     }
 
     const hashedKey = hashApiKey(apiKey);
-
     const user = await apiUserModel.findApiKey(hashedKey);
 
     if (typeof user === "undefined") {
@@ -76,6 +75,7 @@ export const AuthMiddleWare: RequestHandler = async (req, res, next) => {
 
     // Update user uses
     user.uses += 1;
+    // Nekdis does rly need an update method... (maybe 0.15?)
     await apiUserModel.save(user);
 
     next();

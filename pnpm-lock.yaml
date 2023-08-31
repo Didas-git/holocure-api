@@ -15,8 +15,8 @@ dependencies:
     specifier: ^4.18.2
     version: 4.18.2
   nekdis:
-    specifier: ^0.11.0
-    version: 0.11.0
+    specifier: ^0.11.4
+    version: 0.11.4
   tslib:
     specifier: ^2.6.2
     version: 2.6.2
@@ -520,7 +520,7 @@ packages:
     resolution: {integrity: sha512-zbivROJ0ZqLAtMzgzIUC4oNqDG9iF0lSsAqpOD9kbs5xcIM3dTiyuHvBc7R8MtWBp3AAWGaovJa+wzWPjLYW7Q==}
     dependencies:
       '@types/node': 20.5.7
-      '@types/qs': 6.9.7
+      '@types/qs': 6.9.8
       '@types/range-parser': 1.2.4
       '@types/send': 0.17.1
     dev: true
@@ -530,7 +530,7 @@ packages:
     dependencies:
       '@types/body-parser': 1.19.2
       '@types/express-serve-static-core': 4.17.36
-      '@types/qs': 6.9.7
+      '@types/qs': 6.9.8
       '@types/serve-static': 1.15.2
     dev: true
 
@@ -558,8 +558,8 @@ packages:
     resolution: {integrity: sha512-dP7f3LdZIysZnmvP3ANJYTSwg+wLLl8p7RqniVlV7j+oXSXAbt9h0WIBFmJy5inWZoX9wZN6eXx+YXd9Rh3RBA==}
     dev: true
 
-  /@types/qs@6.9.7:
-    resolution: {integrity: sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==}
+  /@types/qs@6.9.8:
+    resolution: {integrity: sha512-u95svzDlTysU5xecFNTgfFG5RUWu1A9P0VzgpcIiGZA9iraHOdSzcxMxQ55DyeRaGCSxQi7LxXDI4rzq/MYfdg==}
     dev: true
 
   /@types/range-parser@1.2.4:
@@ -1741,8 +1741,8 @@ packages:
     engines: {node: '>= 0.6'}
     dev: false
 
-  /nekdis@0.11.0:
-    resolution: {integrity: sha512-riEdZRXALBXd1FIXF9AUK4lELPP1RmCzOp01iAKfKlCHkULWMNtuxuLFq6KgBZISMbCz/NVrnocaeTn4wS5SkA==}
+  /nekdis@0.11.4:
+    resolution: {integrity: sha512-97Al0L2mGNcgeEghAW4hEZxytIN7mZVPfLNT1tn2yYJHmJIa4mZWVCfwV+HCh6gPdm/P//uxzncOFf8DL6Qd9A==}
     dependencies:
       '@infinite-fansub/logger': 2.2.2
       colours.js: 3.1.2

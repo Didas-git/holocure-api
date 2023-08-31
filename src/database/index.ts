@@ -108,6 +108,10 @@ const weaponSchema = client.schema({
         type: "reference",
         schema: "self"
     }
+}, {
+    findByName: async function (name: string) {
+        return await this.search().where("name").eq(name).returnFirst();
+    }
 });
 
 export const weaponModel = client.model("Weapon", weaponSchema);
@@ -138,6 +142,10 @@ const itemSchema = client.schema({
         type: "string",
         optional: true
     }
+}, {
+    findByName: async function (name: string) {
+        return await this.search().where("name").eq(name).returnFirst();
+    }
 });
 
 export const itemModel = client.model("Item", itemSchema);
@@ -155,6 +163,10 @@ const skillSchema = client.schema({
     notes: {
         type: "array",
         optional: true
+    }
+}, {
+    findByName: async function (name: string) {
+        return await this.search().where("name").eq(name).returnFirst();
     }
 });
 
@@ -184,6 +196,10 @@ const characterSchema = client.schema({
     crt: "number",
     /** 1 to 5 (1 = flat) */
     size: "number"
+}, {
+    findByName: async function (name: string) {
+        return await this.search().where("name").eq(name).returnFirst();
+    }
 });
 
 export const characterModel = client.model("Character", characterSchema);
