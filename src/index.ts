@@ -14,7 +14,7 @@ import type { ErrorResponse } from "./typings/shared";
     // Create the RediSearch indexes
     await initializeIndexes();
 
-    if (process.env.ENVIRONMENT === "Development") {
+    if (process.env.ENVIRONMENT === "development") {
         const { populateTestUsers } = await import("./database/populate");
         await populateTestUsers();
     }

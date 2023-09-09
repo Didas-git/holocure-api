@@ -8,7 +8,7 @@ const sharedValueSecondsSchema = client.schema({
 });
 
 const weaponSchema = client.schema({
-    name: "string",
+    name: { type: "string", index: true },
     description: "string",
     /** How often it appears */
     weight: "number",
@@ -117,7 +117,7 @@ const weaponSchema = client.schema({
 export const weaponModel = client.model("Weapon", weaponSchema);
 
 const itemSchema = client.schema({
-    name: "string",
+    name: { type: "string", index: true },
     description: "string",
     /** How often it appears */
     weight: "number",
@@ -151,7 +151,7 @@ const itemSchema = client.schema({
 export const itemModel = client.model("Item", itemSchema);
 
 const skillSchema = client.schema({
-    name: "string",
+    name: { type: "string", index: true },
     /**
      * 0 = Special Skill
      * 1 = Normal Skill
@@ -173,7 +173,7 @@ const skillSchema = client.schema({
 export const skillModel = client.model("Skill", skillSchema);
 
 const characterSchema = client.schema({
-    name: "string",
+    name: { type: "string", index: true },
     /** URL for the icon */
     icon: "string",
     /** Hololive generation name */
@@ -205,8 +205,8 @@ const characterSchema = client.schema({
 export const characterModel = client.model("Character", characterSchema);
 
 const apiUserSchema = client.schema({
-    name: "string",
-    apiKey: "string",
+    name: { type: "string", index: true },
+    apiKey: { type: "string", index: true },
     banned: { type: "boolean", default: false },
     uses: { type: "number", default: 0 },
     isAdministrator: { type: "boolean", default: false },
