@@ -56,8 +56,8 @@ export const AuthMiddleWare: RequestHandler = async (req, res, next) => {
     }
 
     if (user.banned) {
-        return res.status(401).json({
-            code: 401,
+        return res.status(403).json({
+            code: 403,
             error: "Banned from the api",
             details: "The current user has been banned from using the api"
         } satisfies ErrorResponse);
@@ -65,8 +65,8 @@ export const AuthMiddleWare: RequestHandler = async (req, res, next) => {
 
     if (!user.isAdministrator) {
         if (!(req.method === "GET" && user.permissions.read) && !(req.method !== "GET" && user.permissions.write)) {
-            return res.status(401).json({
-                code: 401,
+            return res.status(403).json({
+                code: 403,
                 error: "Invalid permissions",
                 details: "The current user does not have any granted permissions, please contact an administrator"
             } satisfies ErrorResponse);
