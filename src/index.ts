@@ -27,9 +27,9 @@ import type { ErrorResponse } from "./typings/shared";
     // Remove header
     app.disable("x-powered-by");
     app.use(LoggerMiddleware);
-    app.use(IPFixedWindowLimiting({
+    app.use(await IPFixedWindowLimiting({
         limit: 150,
-        windowInMinutes: 1
+        windowInMs: 60000
     }));
 
     // api versioning

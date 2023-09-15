@@ -1,50 +1,31 @@
-import { limitRateModel } from "../database";
+import { readFile } from "node:fs/promises";
+
+import { client } from "../database/client";
 
 import type { RequestHandler } from "express";
 import type { ErrorResponse } from "../typings/shared";
+import { join } from "node:path";
 
-export function IPFixedWindowLimiting(options: { limit: number, windowInMinutes: number }): RequestHandler {
+export async function IPFixedWindowLimiting(options: { limit: number, windowInMs: number }): Promise<RequestHandler> {
+    await client.raw.functionLoad((
+        await readFile(join(__dirname, "../utils/fixed-window-rate-limit.lua"))
+    ).toString("utf8"), { REPLACE: true });
+
     return async (req, res, next) => {
         const { ip } = req;
 
-        /*
-         We expire the key after 3 days of inactivity to free up memory
+        const key = `Holocure:RateLimit:${ip}`;
 
-         3 * 24 * 60 * 60
-        */
-        const expireTime = 259200;
-        const currentMinute = Math.floor(Date.now() / 1000 / 60);
-        const info = await limitRateModel.get(ip);
+        const hits = await client.raw.sendCommand(["FCALL", "fwrl", "1", key, options.windowInMs.toString()]);
 
-        if (!info) {
-            await limitRateModel.createAndSave({
-                $id: ip,
-                minute: currentMinute,
-                amount: 1
-            });
-
-            await limitRateModel.expire([ip], expireTime);
-
-            return next();
+        if (typeof hits !== "number") {
+            return res.status(500).json({
+                code: 500,
+                error: "Unexpected behavior"
+            } satisfies ErrorResponse);
         }
 
-        const needsUpdate = currentMinute - options.windowInMinutes > info.minute;
-
-        if (needsUpdate) {
-            info.minute = currentMinute;
-            info.amount = 1;
-            await limitRateModel.save(info);
-
-            await limitRateModel.expire([ip], expireTime);
-
-            return next();
-        }
-
-        const amt = await limitRateModel.increment(ip);
-
-        await limitRateModel.expire([ip], expireTime);
-
-        if (amt > options.limit) {
+        if (hits > options.limit) {
             return res.status(429).json({
                 code: 429,
                 error: "Rate limit exceeded"
