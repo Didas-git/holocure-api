@@ -1,7 +1,7 @@
 import { Router } from "express";
 
-import { AuthMiddleWare } from "../../utils/middleware";
 import { characterModel, itemModel, skillModel, weaponModel } from "../../database";
+import { AuthMiddleWare } from "../../middleware";
 
 import type { ErrorResponse, VersionInfo } from "../../typings/shared";
 

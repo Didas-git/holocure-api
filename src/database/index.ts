@@ -1,6 +1,6 @@
 import "./client";
 
-import { client } from "nekdis";
+import { client } from "./client";
 
 const sharedValueSecondsSchema = client.schema({
     value: "number",
@@ -224,6 +224,17 @@ const apiUserSchema = client.schema({
 });
 
 export const apiUserModel = client.model("APIUser", apiUserSchema);
+
+const limitRateSchema = client.schema({
+    minute: "number",
+    amount: "number"
+}, {
+    increment: async function (id: string): Promise<number> {
+        return await client.raw.hIncrBy(this.formatId(id), "amount", 1);
+    }
+}, { dataStructure: "HASH" });
+
+export const limitRateModel = client.model("LimitRate", limitRateSchema);
 
 export async function initializeIndexes(): Promise<void> {
     await weaponModel.createIndex();

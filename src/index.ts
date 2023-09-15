@@ -4,7 +4,7 @@ import { createServer } from "node:http";
 import { join } from "node:path";
 import express from "express";
 
-import { LoggerMiddleware } from "./utils/middleware";
+import { IPFixedWindowLimiting, LoggerMiddleware } from "./middleware";
 import { initializeIndexes } from "./database";
 import { v1Router } from "./routers";
 
@@ -27,6 +27,10 @@ import type { ErrorResponse } from "./typings/shared";
     // Remove header
     app.disable("x-powered-by");
     app.use(LoggerMiddleware);
+    app.use(IPFixedWindowLimiting({
+        limit: 150,
+        windowInMinutes: 1
+    }));
 
     // api versioning
     app.use("/v1", v1Router);

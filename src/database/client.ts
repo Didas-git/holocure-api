@@ -1,6 +1,6 @@
-import { client } from "nekdis";
+import { Client } from "nekdis";
 
-client.options = {
+export const client = new Client({
     inject: {
         schema: {
             options: {
@@ -8,7 +8,7 @@ client.options = {
             }
         }
     }
-};
+});
 
 client.globalPrefix = "Holocure";
 
