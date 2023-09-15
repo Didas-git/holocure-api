@@ -15,8 +15,8 @@ dependencies:
     specifier: ^4.18.2
     version: 4.18.2
   nekdis:
-    specifier: ^0.12.2
-    version: 0.12.2
+    specifier: ^0.12.3
+    version: 0.12.3
   tslib:
     specifier: ^2.6.2
     version: 2.6.2
@@ -1741,8 +1741,8 @@ packages:
     engines: {node: '>= 0.6'}
     dev: false
 
-  /nekdis@0.12.2:
-    resolution: {integrity: sha512-jT3jWfqRi6KtQKHSrB9V2ln164RVMEbJ5sOWkFiHHCUpxeQLuc/0s7lUKe9TtR/ad4xH3WgF/brDyxwbA4AaUw==}
+  /nekdis@0.12.3:
+    resolution: {integrity: sha512-L4wZc8Mk/8Ax3rb0t6CSAgkLRgUayPFK2tClncla3xsGUFtNBT/IGEgHi4kucT+ujxrDE1sIqXRUY4CdIyvDEQ==}
     dependencies:
       '@infinite-fansub/logger': 2.2.2
       colours.js: 3.1.2

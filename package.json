@@ -39,7 +39,7 @@
     "@infinite-fansub/logger": "^2.2.2",
     "colours.js": "^3.1.2",
     "express": "^4.18.2",
-    "nekdis": "^0.12.2",
+    "nekdis": "^0.12.3",
     "tslib": "^2.6.2"
   },
   "devDependencies": {
